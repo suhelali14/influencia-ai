@@ -1,0 +1,26 @@
+{
+  "timestamp": "2025-11-13T13:28:41.277337",
+  "dataset": "india",
+  "data_stats": {
+    "creators": 15000,
+    "campaigns": 7000,
+    "interactions": 150000,
+    "training_samples": 8000,
+    "test_samples": 2000,
+    "features": 32
+  },
+  "models": {
+    "xgboost": {
+      "train_r2": 0.9107101650137385,
+      "test_r2": 0.8626038821501146,
+      "n_estimators": 100,
+      "max_depth": 6
+    },
+    "neural_network": {
+      "train_mse": 0.40527108311653137,
+      "test_mse": 0.3984313905239105,
+      "epochs": 20,
+      "architecture": "128-64-32-1"
+    }
+  }
+}
