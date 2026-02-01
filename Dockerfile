@@ -1,19 +1,20 @@
-# Production Dockerfile for AI Service
+# Production Dockerfile for AI Service (CPU-Optimized)
 FROM python:3.11-slim AS base
 
 WORKDIR /app
 
-# Install system dependencies
+# Install system dependencies (minimal for faster builds)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
     curl \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
 
 # Copy requirements first for caching
 COPY requirements.txt .
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies (CPU-only torch, no CUDA = 500MB vs 3.5GB)
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY . .
